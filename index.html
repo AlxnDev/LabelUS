@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Label Collab ALXNMANE</title>
+
+<style>
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(black, #0d1117);
+  color: white;
+  text-align: center;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  z-index: 1000;
+}
+
+.navbar a {
+  color: #ff4d12;
+  margin: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a:hover { color: white; }
+
+/* HERO */
+.hero {
+  padding: 120px 20px 60px;
+}
+
+.hero h1 {
+  font-size: 48px;
+}
+
+/* ARTIST */
+.artist {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* INSIGNIA Ⓥ PRO */
+.badge {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: bold;
+  margin-left: 8px;
+  cursor: pointer;
+  color: #1da1f2;
+  text-shadow: 
+    0 0 5px #1da1f2,
+    0 0 10px #1da1f2,
+    0 0 15px #1da1f2;
+  transition: 0.3s;
+}
+
+.badge:hover {
+  transform: scale(1.2);
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px #1da1f2,
+    0 0 20px #1da1f2;
+}
+
+#badgeText {
+  margin-top: 5px;
+  color: #1da1f2;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+/* SECTIONS */
+.section {
+  padding: 40px 20px;
+}
+
+/* CARDS */
+.card {
+  background: #111;
+  padding: 20px;
+  margin: 10px auto;
+  border-radius: 12px;
+  max-width: 400px;
+}
+
+/* BUTTONS */
+.btn {
+  display: block;
+  padding: 15px;
+  margin: 10px auto;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  max-width: 300px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.spotify { background: #1db954; }
+.youtube { background: #ff0000; }
+.instagram { background: linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045); }
+.tiktok { background: linear-gradient(45deg,#000,#25F4EE,#FE2C55); }
+
+/* TOP BUTTON */
+#topBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff4d12;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <a href="#">Inicio</a>
+  <a href="#music">Música</a>
+  <a href="#links">Redes</a>
+  <a href="#contact">Contacto</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>ALXNMANE</h1>
+
+  <p class="artist">
+    Artist 
+    <span class="badge" onclick="toggleBadge()" title="Artista Verificado">
+      Ⓥ
+    </span>
+  </p>
+
+  <div id="badgeText">Artista Verificado</div>
+
+  <p>Creador de música electrónica & funk 🚀</p>
+
+  <button class="btn spotify" onclick="window.open('https://open.spotify.com/artist/6mnuWCFpmaODxdTvsJeEI6')">
+    Escuchar en Spotify
+  </button>
+
+  <button class="btn" style="background:#ff4d12" onclick="copyLink()">
+    Copiar link 🔗
+  </button>
+</div>
+
+<!-- MUSIC -->
+<div class="section" id="music">
+  <h2>🎧 Último lanzamiento</h2>
+
+  <iframe 
+    src="https://open.spotify.com/embed/artist/6mnuWCFpmaODxdTvsJeEI6"
+    width="300" height="380" frameborder="0">
+  </iframe>
+</div>
+
+<!-- LINKS -->
+<div class="section" id="links">
+  <h2>🌐 Redes</h2>
+
+  <a class="btn spotify" href="https://open.spotify.com/artist/6mnuWCFpmaODxdTvsJeEI6" target="_blank">Spotify</a>
+  <a class="btn youtube" href="https://youtube.com/@alxnmanexzmusic" target="_blank">YouTube</a>
+  <a class="btn instagram" href="https://www.instagram.com/alxnmanemusic" target="_blank">Instagram</a>
+  <a class="btn tiktok" href="https://tiktok.com/@alxnmanegzmusic" target="_blank">TikTok</a>
+</div>
+
+<!-- CONTACTO -->
+<div class="section" id="contact">
+  <h2>📩 Contacto</h2>
+
+  <div class="card">
+    <p>¿Quieres trabajar conmigo?</p>
+
+    <!-- GMAIL WEB -->
+    <a class="btn instagram" 
+       href="https://mail.google.com/mail/?view=cm&to=alxnmane@gmail.com&subject=Contacto%20desde%20web" 
+       target="_blank">
+      Enviar Email
+    </a>
+  </div>
+</div>
+
+<button id="topBtn">⬆</button>
+
+<script>
+
+// BOTÓN SUBIR
+const topBtn = document.getElementById("topBtn");
+
+window.onscroll = () => {
+  topBtn.style.display = window.scrollY > 300 ? "block" : "none";
+};
+
+topBtn.onclick = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+// INSIGNIA
+let visible = false;
+
+function toggleBadge() {
+  const text = document.getElementById("badgeText");
+  visible = !visible;
+  text.style.opacity = visible ? "1" : "0";
+}
+
+// COPIAR LINK
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href);
+  alert("Link copiado 🔗");
+}
+
+</script>
+
+</body>
+</html>
