@@ -3,18 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ALXNMANE | Artist</title>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<!-- SEO -->
+<meta name="description" content="ALXNMANE - Artista de música electrónica y funk.">
+<meta property="og:title" content="ALXNMANE | Artist">
+<meta property="og:description" content="Música electrónica & funk">
+<meta property="og:type" content="website">
+
+<!-- FUENTE PRO -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(black, #0d1117);
   color: white;
   text-align: center;
@@ -35,36 +40,70 @@ body {
   color: #ff4d12;
   margin: 10px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+}
+
+.navbar a:hover {
+  color: white;
 }
 
 /* HERO */
 .hero {
-  padding: 120px 20px 60px;
+  padding: 130px 20px 60px;
+  animation: fadeIn 1s ease-in;
 }
 
 .hero h1 {
-  font-size: 48px;
-}
-
-/* ARTIST */
-.artist {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 52px;
 }
 
 /* INSIGNIA */
-.badge {
-  color: #1da1f2;
-  font-weight: bold;
-  margin-left: 5px;
-  cursor: pointer;
+.artist {
+  font-size: 28px;
+  font-weight: 600;
 }
 
+.badge {
+  font-size: 22px;
+  margin-left: 8px;
+  cursor: pointer;
+  color: #1da1f2;
+  text-shadow: 0 0 10px #1da1f2;
+  transition: 0.3s;
+}
+
+.badge:hover {
+  transform: scale(1.2);
+}
+
+/* TEXT VERIFY */
 #badgeText {
+  margin-top: 5px;
   color: #1da1f2;
   opacity: 0;
   transition: 0.3s;
+}
+
+/* SECTIONS */
+.section {
+  padding: 60px 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1s;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CARDS */
+.card {
+  background: #111;
+  padding: 20px;
+  margin: 10px auto;
+  border-radius: 12px;
+  max-width: 400px;
 }
 
 /* BOTONES */
@@ -77,7 +116,6 @@ body {
   color: white;
   max-width: 300px;
   transition: 0.3s;
-  border: none;
 }
 
 .btn:hover {
@@ -87,11 +125,26 @@ body {
 .spotify { background: #1db954; }
 .youtube { background: #ff0000; }
 .instagram { background: linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045); }
+.tiktok { background: linear-gradient(45deg,#000,#25F4EE,#FE2C55); }
 
-/* USER */
-#userInfo {
-  margin-top: 10px;
-  color: #1da1f2;
+/* BOTÓN ARRIBA */
+#topBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff4d12;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 </style>
@@ -111,85 +164,99 @@ body {
   <h1>ALXNMANE</h1>
 
   <p class="artist">
-    Artist <span class="badge">Ⓥ</span>
+    Artist 
+    <span class="badge" onclick="toggleBadge()">Ⓥ</span>
   </p>
 
   <div id="badgeText">Artista Verificado</div>
 
-  <!-- LOGIN -->
-  <button class="btn" style="background:#4285F4" onclick="loginWithGoogle()">
-    🔐 Iniciar sesión con Google
-  </button>
-
-  <div id="userInfo"></div>
-
-  <p>Creador de música electrónica 🚀</p>
+  <p>Creador de música electrónica & funk 🚀</p>
 
   <button class="btn spotify" onclick="window.open('https://open.spotify.com/artist/6mnuWCFpmaODxdTvsJeEI6')">
     Escuchar en Spotify
   </button>
+
+  <button class="btn" style="background:#ff4d12" onclick="copyLink()">
+    Copiar link 🔗
+  </button>
+</div>
+
+<!-- MUSIC -->
+<div class="section" id="music">
+  <h2>🎧 Último lanzamiento</h2>
+
+  <iframe 
+    src="https://open.spotify.com/embed/artist/6mnuWCFpmaODxdTvsJeEI6"
+    width="300" height="380" frameborder="0">
+  </iframe>
+</div>
+
+<!-- LINKS -->
+<div class="section" id="links">
+  <h2>🌐 Redes</h2>
+
+  <a class="btn spotify" href="https://open.spotify.com/artist/6mnuWCFpmaODxdTvsJeEI6" target="_blank">Spotify</a>
+  <a class="btn youtube" href="https://youtube.com/@alxnmanexzmusic" target="_blank">YouTube</a>
+  <a class="btn instagram" href="https://www.instagram.com/alxnmanemusic" target="_blank">Instagram</a>
+  <a class="btn tiktok" href="https://tiktok.com/@alxnmanegzmusic" target="_blank">TikTok</a>
 </div>
 
 <!-- CONTACTO -->
 <div class="section" id="contact">
   <h2>📩 Contacto</h2>
 
-  <!-- USO CORRECTO (GMAIL WEB) -->
-  <a class="btn instagram"
-     href="https://mail.google.com/mail/?view=cm&to=alxnmane@gmail.com&subject=Contacto%20desde%20web"
-     target="_blank">
-    Enviar Email
-  </a>
+  <div class="card">
+    <p>¿Quieres trabajar conmigo?</p>
+
+    <a class="btn instagram"
+       href="https://mail.google.com/mail/?view=cm&to=alxnmane@gmail.com&subject=Contacto%20desde%20web"
+       target="_blank">
+      Enviar Email
+    </a>
+  </div>
 </div>
+
+<button id="topBtn">⬆</button>
 
 <script>
 
-/* 🔥 TU CONFIG DE FIREBASE (REEMPLAZA ESTO CON EL TUYO) */
-const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_PROYECTO.firebaseapp.com",
-  projectId: "TU_PROYECTO",
-  appId: "TU_APP_ID"
+// BOTÓN ARRIBA
+const topBtn = document.getElementById("topBtn");
+
+window.onscroll = () => {
+  topBtn.style.display = window.scrollY > 300 ? "block" : "none";
+
+  // animación scroll
+  document.querySelectorAll('.section').forEach(sec => {
+    const top = window.innerHeight;
+    const pos = sec.getBoundingClientRect().top;
+
+    if(pos < top - 100){
+      sec.classList.add('show');
+    }
+  });
 };
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+topBtn.onclick = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
-/* LOGIN CON GOOGLE */
-function loginWithGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
+// INSIGNIA
+let visible = false;
 
-  auth.signInWithPopup(provider)
-    .then(result => {
-      const user = result.user;
-
-      document.getElementById("userInfo").innerHTML = `
-        👤 ${user.displayName}<br>
-        📧 ${user.email}<br>
-        🆔 ${user.uid}
-      `;
-    })
-    .catch(err => console.log(err));
+function toggleBadge() {
+  const text = document.getElementById("badgeText");
+  visible = !visible;
+  text.style.opacity = visible ? "1" : "0";
 }
 
-/* MANTENER SESIÓN */
-auth.onAuthStateChanged(user => {
-  if (user) {
-    document.getElementById("userInfo").innerHTML = `
-      👤 ${user.displayName}<br>
-      📧 ${user.email}<br>
-      🆔 ${user.uid}
-    `;
-  }
-});
-
-/* INSIGNIA */
-document.querySelector(".badge").onclick = () => {
-  const t = document.getElementById("badgeText");
-  t.style.opacity = t.style.opacity === "1" ? "0" : "1";
-};
+// COPIAR LINK
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href);
+  alert("Link copiado 🔗");
+}
 
 </script>
 
 </body>
-</html>
+  </html>
