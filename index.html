@@ -3,14 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Label Collab ALXNMANE</title>
+
+<title>ALXNMANE | Artist</title>
+
+<!-- SEO -->
+<meta name="description" content="ALXNMANE - Artista de música electrónica y funk.">
+<meta property="og:title" content="ALXNMANE | Artist">
+<meta property="og:description" content="Música electrónica & funk">
+<meta property="og:type" content="website">
+
+<!-- FUENTE PRO -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(black, #0d1117);
   color: white;
   text-align: center;
@@ -31,49 +40,43 @@ body {
   color: #ff4d12;
   margin: 10px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-.navbar a:hover { color: white; }
+.navbar a:hover {
+  color: white;
+}
 
 /* HERO */
 .hero {
-  padding: 120px 20px 60px;
+  padding: 130px 20px 60px;
+  animation: fadeIn 1s ease-in;
 }
 
 .hero h1 {
-  font-size: 48px;
+  font-size: 52px;
 }
 
-/* ARTIST */
+/* INSIGNIA */
 .artist {
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-/* INSIGNIA Ⓥ PRO */
 .badge {
-  display: inline-block;
   font-size: 22px;
-  font-weight: bold;
   margin-left: 8px;
   cursor: pointer;
   color: #1da1f2;
-  text-shadow: 
-    0 0 5px #1da1f2,
-    0 0 10px #1da1f2,
-    0 0 15px #1da1f2;
+  text-shadow: 0 0 10px #1da1f2;
   transition: 0.3s;
 }
 
 .badge:hover {
   transform: scale(1.2);
-  color: #ffffff;
-  text-shadow: 
-    0 0 10px #1da1f2,
-    0 0 20px #1da1f2;
 }
 
+/* TEXT VERIFY */
 #badgeText {
   margin-top: 5px;
   color: #1da1f2;
@@ -83,7 +86,15 @@ body {
 
 /* SECTIONS */
 .section {
-  padding: 40px 20px;
+  padding: 60px 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1s;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* CARDS */
@@ -95,7 +106,7 @@ body {
   max-width: 400px;
 }
 
-/* BUTTONS */
+/* BOTONES */
 .btn {
   display: block;
   padding: 15px;
@@ -116,7 +127,7 @@ body {
 .instagram { background: linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045); }
 .tiktok { background: linear-gradient(45deg,#000,#25F4EE,#FE2C55); }
 
-/* TOP BUTTON */
+/* BOTÓN ARRIBA */
 #topBtn {
   position: fixed;
   bottom: 20px;
@@ -129,6 +140,13 @@ body {
   cursor: pointer;
   display: none;
 }
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 </style>
 </head>
 
@@ -147,9 +165,7 @@ body {
 
   <p class="artist">
     Artist 
-    <span class="badge" onclick="toggleBadge()" title="Artista Verificado">
-      Ⓥ
-    </span>
+    <span class="badge" onclick="toggleBadge()">Ⓥ</span>
   </p>
 
   <div id="badgeText">Artista Verificado</div>
@@ -192,9 +208,8 @@ body {
   <div class="card">
     <p>¿Quieres trabajar conmigo?</p>
 
-    <!-- GMAIL WEB -->
-    <a class="btn instagram" 
-       href="https://mail.google.com/mail/?view=cm&to=alxnmane@gmail.com&subject=Contacto%20desde%20web" 
+    <a class="btn instagram"
+       href="https://mail.google.com/mail/?view=cm&to=alxnmane@gmail.com&subject=Contacto%20desde%20web"
        target="_blank">
       Enviar Email
     </a>
@@ -205,11 +220,21 @@ body {
 
 <script>
 
-// BOTÓN SUBIR
+// BOTÓN ARRIBA
 const topBtn = document.getElementById("topBtn");
 
 window.onscroll = () => {
   topBtn.style.display = window.scrollY > 300 ? "block" : "none";
+
+  // animación scroll
+  document.querySelectorAll('.section').forEach(sec => {
+    const top = window.innerHeight;
+    const pos = sec.getBoundingClientRect().top;
+
+    if(pos < top - 100){
+      sec.classList.add('show');
+    }
+  });
 };
 
 topBtn.onclick = () => {
@@ -234,4 +259,4 @@ function copyLink() {
 </script>
 
 </body>
-</html>
+    </html>
